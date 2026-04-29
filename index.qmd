@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+This is a book scaffolded from the [`hebstr-book`](https://github.com/hebstr/quarto-hebstr-book) Quarto project template, which builds on top of [`hebstr-doc`](https://github.com/hebstr/quarto-hebstr-doc) for visual identity.
+
+Replace this preface with your own.

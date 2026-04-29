@@ -1,0 +1,7 @@
+# Introduction
+
+Demo chapter. Replace with your own content.
+
+## A section
+
+Cross-references and citations work as in any Quarto book — see @sec-method and [@knuth1984].

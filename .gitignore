@@ -1,0 +1,14 @@
+/.quarto/
+**/*.quarto_ipynb
+/.luarc.json
+/_book/
+/_site/
+/*.html
+/*.pdf
+/*.typ
+/*_files/
+/.claude/
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
