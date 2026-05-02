@@ -1,61 +1,23 @@
 project:
   type: book
 
+metadata-files:
+  - _format.yml
+
 book:
-  title: "Book title"
+  title: "A template for Quarto book"
   author: "Author name"
   date: last-modified
+  repo-url: https://github.com/hebstr/quarto-hebstr-book/
   chapters:
     - index.qmd
-    - chapters/01-introduction.qmd
-    - chapters/02-method.qmd
-    - chapters/03-conclusion.qmd
+    - part: "Chapters"
+      chapters:
+        - chapters/01-introduction.qmd
+        - chapters/02-method.qmd
+        - chapters/03-conclusion.qmd
+    - part: "Annexes"
+      chapters:
+        - chapters/A1-appendix.qmd
 
 bibliography: references.bib
-
-# Why everything is here and not in _extensions/hebstr-book/_extension.yml:
-# Quarto does not propagate the following keys from a project template
-# extension's contributes.project.format. They must live in the consumer's
-# _quarto.yml: theme, page-layout, embed-resources, grid.sidebar-width,
-# include-after-body. Only grid.body-width / margin-width / gutter-width
-# propagate, and we keep them here too for cohesion (all layout knobs in one
-# place).
-#
-# page-layout: article — hebstr-doc ships page-layout: full (correct for
-# single-doc HTML where main content can spill into the right margin via
-# .column-page-right). A book needs main content confined to body-content.
-#
-# embed-resources: false — hebstr-doc ships embed-resources: true (correct
-# for single-doc, gives a self-contained portable file). A book has multiple
-# pages sharing site_libs/, and embed-resources triggers Pandoc to try to
-# inline referenced sibling chapters (Previous/Next nav), producing
-# "Could not fetch ../chapters/X.html" warnings on every render.
-#
-# include-after-body: [restore-toggle.html] — hebstr-doc ships
-# toggle-position.html which moves the color-scheme toggle from the sidebar
-# into the chapter H1 (works for single-doc, breaks the natural sidebar
-# placement in a book). include-after-body cannot be overridden from
-# _quarto.yml (Quarto append-merges instead of replacing), so we layer a
-# counter-script that runs after and moves the toggle back to the sidebar.
-format:
-  hebstr-doc-html:
-    page-layout: article
-    embed-resources: false
-    include-after-body:
-      - _extensions/hebstr-book/restore-toggle.html
-    grid:
-      sidebar-width: 350px
-      body-width: 1100px
-      margin-width: 350px
-      gutter-width: 1rem
-    theme:
-      light:
-        - _extensions/hebstr-doc/theme-light.scss
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-book/extras.scss
-      dark:
-        - _extensions/hebstr-doc/theme-dark.scss
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-book/extras.scss
-  hebstr-doc-typst: default
-  # hebstr-doc-docx: default
