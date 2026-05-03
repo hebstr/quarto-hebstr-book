@@ -3,7 +3,7 @@ format:
     page-layout: article
     embed-resources: false
     include-after-body:
-      - _extensions/hebstr/hebstr-book/restore-toggle.html
+      - _extensions/hebstr-book/restore-toggle.html
     grid:
       sidebar-width: 350px
       body-width: 1100px
@@ -11,8 +11,8 @@ format:
       gutter-width: 1rem
     theme:
       light:
-        - _extensions/hebstr/hebstr-book/theme-extras-base.scss
-        - _extensions/hebstr/hebstr-book/theme-extras-light.scss
+        - _extensions/hebstr-book/theme-extras-base.scss
+        - _extensions/hebstr-book/theme-extras-light.scss
       dark:
-        - _extensions/hebstr/hebstr-book/theme-extras-base.scss
-        - _extensions/hebstr/hebstr-book/theme-extras-dark.scss
+        - _extensions/hebstr-book/theme-extras-base.scss
+        - _extensions/hebstr-book/theme-extras-dark.scss
