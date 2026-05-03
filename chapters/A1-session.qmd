@@ -1,0 +1,6 @@
+# Session {.unnumbered}
+
+```{r}
+#| echo: true
+sessioninfo::session_info(pkgs = "attached")
+```

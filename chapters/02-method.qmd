@@ -1,7 +1,0 @@
-# Method {#sec-method}
-
-Demo chapter. Replace with your own content.
-
-```r
-1 + 1
-```

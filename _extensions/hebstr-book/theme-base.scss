@@ -113,9 +113,9 @@ body {
     border-bottom: none;
     color: var(--primary);
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
-    gap: 1rem;
+    gap: 0;
   }
   .subtitle {
     font-size: 24px;
@@ -128,22 +128,12 @@ body {
   .quarto-title-block > div {
     gap: 1.5rem;
   }
-  .quarto-color-scheme-toggle.hebstr-title-toggle {
-    display: inline-flex;
-    color: var(--primary-dark);
-    font-size: 1.5rem;
-    flex-shrink: 0;
-    &:hover {
-      color: var(--primary);
-    }
-  }
 }
 
 .quarto-color-scheme-toggle {
   > i.bi::before {
     background-image: none !important;
     font-family: "Font Awesome 7 Free" !important;
-    // font-weight: 900 !important;
     content: "\f185";
     color: inherit;
   }
@@ -543,5 +533,71 @@ $callout-types: (
     .callout-body {
       color: color-mix(in srgb, var(--callout-#{$type}-color), var(--callout-text-mix) #{$body-dark});
     }
+  }
+}
+
+// BOOK SIDEBAR & SEARCH -------------------------------------------------------
+
+#quarto-sidebar {
+  background-color: var(--primary-back);
+}
+
+.sidebar-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  color: var(--primary);
+}
+
+.sidebar-title .sidebar-tools-main {
+  gap: 0.4rem;
+  .quarto-navigation-tool {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.sidebar .aa-Form {
+  background-color: var(--primary-surface);
+  color: var(--primary-dark);
+
+  &:focus-within {
+    border: 1px solid var(--primary);
+  }
+
+  .aa-InputWrapperPrefix .aa-Label svg {
+    color: var(--primary-dark);
+  }
+
+  .aa-Input {
+    color: var(--primary-dark);
+    &::placeholder {
+      color: var(--primary-dark);
+      opacity: 0.5;
+    }
+  }
+
+  .aa-ClearButton {
+    color: var(--primary-dark);
+  }
+}
+
+#quarto-search-results .aa-Panel {
+  background-color: var(--primary-back);
+  border-color: $sidebar-bg;
+  .search-result-header {
+    background-color: $primary-surface;
+    color: $body-color;
+  }
+  .aa-Item[aria-selected=false] .search-item {
+    background-color: $primary-back;
+  }
+  .aa-Item[aria-selected=true] .search-item {
+    background-color: $primary;
   }
 }

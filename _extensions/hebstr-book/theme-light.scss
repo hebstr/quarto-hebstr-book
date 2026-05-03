@@ -38,3 +38,9 @@ $sidebar-hl: $primary !default;
 
 $footer-bg: mix($primary, white, 5%) !default;
 $footer-fg: mix($primary, black, 50%) !default;
+
+/*-- scss:rules --*/
+
+.sidebar .aa-Form {
+  border: 2px solid color-mix(in srgb, var(--primary), white 85%);
+}

@@ -34,6 +34,14 @@ local function dedent(line, n)
   return line:sub(1, n):gsub(" ", "") .. line:sub(n + 1)
 end
 
+local function resolve_path(path)
+  if path:sub(1, 1) == "/" then return path end
+  if quarto and quarto.project and quarto.project.directory then
+    return quarto.project.directory .. "/" .. path
+  end
+  return path
+end
+
 local function read_file(filepath, start_line, end_line, dedent_n)
   local fh = io.open(filepath)
   if not fh then
@@ -55,23 +63,20 @@ local function read_file(filepath, start_line, end_line, dedent_n)
   return content
 end
 
-local js_registered = false
-local function ensure_js()
-  if js_registered then return end
-  quarto.doc.add_html_dependency({
-    name = "add-code-files",
-    version = "1.0.0",
-    scripts = { { path = "add-code-files.js", afterBody = true } },
-  })
-  js_registered = true
-end
-
 return {
   ["script"] = function(args, kwargs)
     if #args < 1 then
       error("script shortcode: a path is required, e.g. {{< script path/to/file.R >}}")
     end
     local path = pandoc.utils.stringify(args[1])
+
+    if quarto.doc.is_format("html") then
+      quarto.doc.add_html_dependency({
+        name = "add-code-files",
+        version = "1.0",
+        scripts = { { path = "add-code-files.js" } },
+      })
+    end
 
     local ext          = (path:match("%.([^.]+)$") or "")
     local default_lang = lang_from_ext[ext] or lang_from_ext[ext:lower()] or ""
@@ -85,12 +90,10 @@ return {
 
     if suffix then filename = filename .. " " .. suffix end
 
-    local content = read_file(path, s, e, dedent_s and tonumber(dedent_s) or nil)
+    local content = read_file(resolve_path(path), s, e, dedent_s and tonumber(dedent_s) or nil)
     if content == nil then
       return pandoc.Div({ pandoc.Para({ pandoc.Str("[script: file not found: " .. path .. "]") }) })
     end
-
-    ensure_js()
 
     local classes = { "cell-code" }
     if lang ~= "" then table.insert(classes, 1, lang) end
@@ -99,7 +102,7 @@ return {
 
     local cb_attrs = {}
     if s then cb_attrs.startFrom = s end
-    if lang ~= "" then cb_attrs.filename = lang end
+    cb_attrs.filename = filename
 
     local code = pandoc.CodeBlock(content, pandoc.Attr("", classes, cb_attrs))
 

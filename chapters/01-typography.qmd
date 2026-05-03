@@ -1,0 +1,67 @@
+# Typography & Text {#sec-typography}
+
+This chapter exercises the typographic system: fonts, heading levels, text elements, lists, block quotes, custom CSS classes, and inline math.
+
+## Fonts {#sec-fonts}
+
+The body font is **Luciole**, a sans-serif designed for low-vision readers.
+Inline `code()` uses **Fira Code** with programming ligatures: `|>`, `<-`, `!=`, `->`.
+
+## Heading levels
+
+Headings are numbered down to level 4 (`number-depth: 4`).
+Each level has a distinct indent and size defined in `theme-base.scss`.
+
+### Level 3 heading
+
+Paragraph with *emphasis*, **strong emphasis**, a [link to the Quarto docs](https://quarto.org), and an internal reference to @sec-typography.
+
+#### Level 4 heading
+
+Deepest numbered level.
+
+## Lists
+
+Unordered:
+
+- First item
+- Second item with a *nested* block:
+    - Nested bullet one
+    - Nested bullet two
+- Third item
+
+Ordered:
+
+1. Initialise the R session
+2. Load the tidyverse
+3. Render the book
+
+## Block quote
+
+> A model is a simplified representation of reality, useful precisely because of what it omits.
+>
+> --- George Box (paraphrased)
+
+## Inline math
+
+Inline math: $y = \beta_0 + \beta_1 x + \varepsilon$.
+
+The `html-math-method: plain` option renders math with plain CSS — no MathJax.
+
+## Custom CSS classes
+
+The theme defines semantic inline classes for use in prose.
+Apply them with Span syntax: `[text]{.class}`.
+
+| Class | Role | Example |
+|-------|------|---------|
+| `.cb1` | Bold, primary colour | [primary label]{.cb1} |
+| `.cb2` | Bold, secondary colour | [secondary label]{.cb2} |
+| `.nb` | Bold, neutral | [neutral label]{.nb} |
+| `.nc` | Monospace, neutral (column names, keys) | [species]{.nc} |
+| `.str` | Monospace, string colour | ["Adelie"]{.str} |
+| `.dig` | Monospace, numeric colour | [42]{.dig} |
+| `.sm-em` | Italic emphasis | [note aside]{.sm-em} |
+
+Example in prose: the column [species]{.nc} takes the value ["Adelie"]{.str}, ["Chinstrap"]{.str}, or ["Gentoo"]{.str}; mean body mass is [4202]{.dig} g.
+The [primary]{.cb1} and [secondary]{.cb2} colours follow the SCSS palette; [muted labels]{.nb} use the neutral tone.

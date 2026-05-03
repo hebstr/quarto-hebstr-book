@@ -1,23 +1,22 @@
 project:
   type: book
-
-metadata-files:
-  - _format.yml
+  execute-dir: project
 
 book:
-  title: "A template for Quarto book"
-  author: "Author name"
+  title: "hebstr-book : Example Book"
+  author: "hebstr"
   date: last-modified
   repo-url: https://github.com/hebstr/quarto-hebstr-book/
   chapters:
     - index.qmd
     - part: "Chapters"
       chapters:
-        - chapters/01-introduction.qmd
-        - chapters/02-method.qmd
-        - chapters/03-conclusion.qmd
+        - chapters/01-typography.qmd
+        - chapters/02-code-data.qmd
+        - chapters/03-callouts-refs.qmd
     - part: "Annexes"
       chapters:
-        - chapters/A1-appendix.qmd
+        - chapters/A1-session.qmd
 
-bibliography: references.bib
+format:
+  hebstr-book-html: default

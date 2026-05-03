@@ -1,0 +1,61 @@
+# Callouts & References {#sec-refs}
+
+This chapter exercises callouts, display equations, and cross-references across the book.
+
+## Callouts {#sec-callouts}
+
+All five callout types use `callout-appearance: simple` (set in `_extension.yml`).
+Icons are Font Awesome glyphs injected via the SCSS loop in `theme-base.scss`.
+
+::: {.callout-note}
+## A note callout.
+
+{{< lipsum 1 >}}
+:::
+
+::: {.callout-tip}
+## A tip callout.
+
+{{< lipsum 1 >}}
+:::
+
+::: {.callout-caution}
+## A caution callout.
+
+{{< lipsum 1 >}}
+:::
+
+::: {.callout-warning}
+## A warning callout.
+
+{{< lipsum 1 >}}
+:::
+
+::: {.callout-important}
+## An important callout.
+
+{{< lipsum 1 >}}
+:::
+
+## Equations {#sec-equations}
+
+Inline math: $y = \beta_0 + \beta_1 x + \varepsilon$.
+
+Display math with a cross-reference target (@eq-ols):
+
+$$
+\hat{\beta} = (X^\top X)^{-1} X^\top y
+$$ {#eq-ols}
+
+## Cross-references {#sec-crossrefs}
+
+Cross-references work across chapters in a Quarto book.
+
+- Chapter: @sec-typography
+- Section in another chapter: @sec-figure
+- Figure: @fig-penguins
+- Table: @tbl-species
+- Equation: @eq-ols
+- Citation: [TODO]
+
+The cross-reference title delimiter is a literal dot (e.g. *Figure 2.1*), set via `crossref.title-delim: "\\."` in `_extension.yml`.

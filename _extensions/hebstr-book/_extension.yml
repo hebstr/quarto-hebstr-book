@@ -1,8 +1,67 @@
 title: hebstr-book
+description: "A Quarto book theme (HTML)."
 author: hebstr
-version: 0.1.0
+version: 0.2.0
 quarto-required: ">=1.9.36"
 contributes:
+  shortcodes:
+    - filters/add-code-files.lua
   project:
     project:
       type: book
+  formats:
+    html:
+      page-layout: article
+      embed-resources: false
+      number-sections: true
+      number-depth: 4
+      toc: true
+      toc-depth: 4
+      toc-expand: true
+      colorlinks: true
+      default-image-extension: png
+      anchor-sections: false
+      code-link: false
+      code-fold: true
+      code-copy: always
+      html-table-processing: none
+      html-math-method: plain
+      callout-appearance: simple
+      fig-align: center
+      fig-cap-location: bottom
+      tbl-cap-location: top
+      date: last-modified
+      mainfont: "Luciole"
+      monofont: "Fira Code"
+      fontsize: 1.2rem
+      linestretch: 1.75
+      lightbox: true
+      crossref:
+        title-delim: "\\."
+        tbl-title: "Table"
+      knitr:
+        opts_chunk:
+          collapse: true
+          comment: "#>"
+          echo: false
+          message: false
+          warning: false
+      theme:
+        light: [theme-light.scss, theme-base.scss]
+        dark: [theme-dark.scss, theme-base.scss]
+      css: fonts/fonts.css
+      grid:
+        sidebar-width: 350px
+        body-width: 1100px
+        margin-width: 350px
+        gutter-width: 1rem
+      filters:
+        - at: pre-quarto
+          path: _extensions/mcanouil/code-window/main.lua
+        - at: post-quarto
+          path: _extensions/mcanouil/code-window/_modules/hotfix/typst-title-fix.lua
+      extensions:
+        code-window:
+          enabled: true
+          auto-filename: true
+          style: default

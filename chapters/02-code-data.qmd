@@ -1,0 +1,139 @@
+# Code & Data {#sec-code}
+
+This chapter exercises figures, tables, code blocks, code windows (with auto-filename), script injection, and tabsets.
+
+## Figure {#sec-figure}
+
+@fig-penguins comes from **ggplot2** on the `palmerpenguins` dataset, with the shared knitr options from `_extension.yml` (`echo: false`, `message: false`, `warning: false`).
+The HTML output wraps figures in a lightbox; click the image to enlarge.
+
+```{r}
+#| label: fig-penguins
+#| fig-cap: "Bill length vs flipper length by species (palmerpenguins)."
+#| fig-width: 6
+#| fig-height: 4
+
+library(ggplot2)
+
+ggplot(
+  palmerpenguins::penguins,
+  aes(x = flipper_length_mm, y = bill_length_mm, colour = species)
+) +
+  geom_point(size = 3, alpha = 0.85) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.6) +
+  labs(
+    x = "Flipper length (mm)",
+    y = "Bill length (mm)",
+    colour = "Species"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+## Table {#sec-table}
+
+`tbl-cap-location: top` (set in `_extension.yml`) places the caption above the table.
+`tbl-title: "Table"` is language-neutral and set extension-wide.
+
+```{r}
+#| label: tbl-species
+#| tbl-cap: "Penguin counts by species (palmerpenguins)."
+#| echo: true
+#| code-fold: false
+
+library(dplyr)
+
+palmerpenguins::penguins |>
+  count(species) |>
+  rename(Species = species, N = n)
+```
+
+## Code block
+
+The chunk below sets `echo: true` (overriding the `_extension.yml` default) to exercise syntax highlighting, code folding, and the copy-on-hover button.
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(dplyr)
+
+palmerpenguins::penguins |>
+  filter(!is.na(body_mass_g)) |>
+  group_by(species, island) |>
+  summarise(
+    n = n(),
+    mean_mass_g = mean(body_mass_g),
+    .groups = "drop"
+  ) |>
+  arrange(desc(mean_mass_g))
+```
+
+## Code window {#sec-code-window}
+
+The blocks below exercise the [`mcanouil/quarto-code-window`](https://github.com/mcanouil/quarto-code-window) filter.
+`style: default` gives a plain filename header; `auto-filename: true` shows the language name for blocks without an explicit `filename=`.
+
+### Auto-generated filename (language name)
+
+```python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+```r
+penguins |>
+  dplyr::count(species)
+```
+
+```bash
+quarto add hebstr/quarto-hebstr-book --no-prompt
+quarto render
+```
+
+## Script fold {#sec-script}
+
+The block below uses `code-fold: true` to produce a collapsible `<details>` element with the filename as summary.
+In standalone documents, the `{{</* script */>}}` shortcode (in-tree `filters/add-code-files.lua`) injects external script files with the same visual result.
+
+{{< script scripts/demo_penguins.R >}}
+
+## Tabset {#sec-tabs}
+
+Tabs use the `.panel-tabset` div class; `tab-background` from `theme-light.scss` / `theme-dark.scss` sets the panel fill.
+
+::: {.panel-tabset}
+
+## Adelie
+
+```{r}
+#| echo: true
+#| code-fold: false
+palmerpenguins::penguins |>
+  dplyr::filter(species == "Adelie") |>
+  dplyr::select(island, bill_length_mm, flipper_length_mm, body_mass_g) |>
+  head(5)
+```
+
+## Chinstrap
+
+```{r}
+#| echo: true
+#| code-fold: false
+palmerpenguins::penguins |>
+  dplyr::filter(species == "Chinstrap") |>
+  dplyr::select(island, bill_length_mm, flipper_length_mm, body_mass_g) |>
+  head(5)
+```
+
+## Gentoo
+
+```{r}
+#| echo: true
+#| code-fold: false
+palmerpenguins::penguins |>
+  dplyr::filter(species == "Gentoo") |>
+  dplyr::select(island, bill_length_mm, flipper_length_mm, body_mass_g) |>
+  head(5)
+```
+
+:::
