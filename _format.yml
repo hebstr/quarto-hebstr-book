@@ -11,12 +11,8 @@ format:
       gutter-width: 1rem
     theme:
       light:
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-doc/theme-light.scss
         - _extensions/hebstr-book/theme-extras-base.scss
         - _extensions/hebstr-book/theme-extras-light.scss
       dark:
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-doc/theme-dark.scss
         - _extensions/hebstr-book/theme-extras-base.scss
         - _extensions/hebstr-book/theme-extras-dark.scss
