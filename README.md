@@ -26,7 +26,7 @@ quarto add hebstr/quarto-hebstr-doc@v1.0.0
 quarto use template hebstr/quarto-hebstr-book
 ```
 
-This copies the template files into the current directory: `_quarto.yml`, `index.qmd`, `chapters/`, `references.bib`, plus the `hebstr-book` extension at `_extensions/hebstr-book/`. Render with:
+This copies the template files into the current directory: `_quarto.yml`, `index.qmd`, `chapters/`, `references.bib`, plus the `hebstr-book` extension at `_extensions/hebstr/hebstr-book/`. Render with:
 
 ```bash
 quarto render
@@ -36,10 +36,10 @@ quarto render
 
 - `_quarto.yml`: book project config — `project.type: book`, chapter list, bibliography, and `metadata-files: [_format.yml]` pointer.
 - `_format.yml`: all format-level configuration — `format.hebstr-doc-html` (theme layering, `page-layout`, `embed-resources`, `grid`, `include-after-body`). See "Why format config is not in `_extension.yml`" below.
-- `_extensions/hebstr-book/_extension.yml`: declares `project.type: book` so `quarto use template` scaffolds the right project type. Nothing else — see below.
-- `_extensions/hebstr-book/theme-extras-base.scss`: book-specific SCSS overrides shared across light and dark themes (sidebar background, H1 chapter alignment, search bar base styles).
-- `_extensions/hebstr-book/theme-extras-light.scss` / `theme-extras-dark.scss`: theme-specific overrides (e.g. `color-mix` tints for search bar border differ between light and dark).
-- `_extensions/hebstr-book/restore-toggle.html`: counter-script that moves the colour-scheme toggle back to the sidebar after `hebstr-doc`'s `toggle-position.html` displaces it into the chapter H1.
+- `_extensions/hebstr/hebstr-book/_extension.yml`: declares `project.type: book` so `quarto use template` scaffolds the right project type. Nothing else — see below.
+- `_extensions/hebstr/hebstr-book/theme-extras-base.scss`: book-specific SCSS overrides shared across light and dark themes (sidebar background, H1 chapter alignment, search bar base styles).
+- `_extensions/hebstr/hebstr-book/theme-extras-light.scss` / `theme-extras-dark.scss`: theme-specific overrides (e.g. `color-mix` tints for search bar border differ between light and dark).
+- `_extensions/hebstr/hebstr-book/restore-toggle.html`: counter-script that moves the colour-scheme toggle back to the sidebar after `hebstr-doc`'s `toggle-position.html` displaces it into the chapter H1.
 - `index.qmd` + `chapters/*.qmd` + `references.bib`: minimal demo content. Replace with your own.
 
 ## Why format config is not in `_extension.yml`
@@ -63,7 +63,7 @@ For consistency we keep all format-level configuration in `_format.yml` (a `meta
 - `page-layout: article` — `hebstr-doc` defaults to `full`, which puts main content in `.column-page-right` and lets it spill into the right margin. A book needs main content confined to `body-content`.
 - `embed-resources: false` — `hebstr-doc` defaults to `true` for self-contained single-document output. In a book, `embed-resources: true` triggers Pandoc to inline sibling chapter HTMLs (Previous/Next nav), producing `Could not fetch ../chapters/X.html` warnings on every render and bloating each chapter HTML to multi-MB.
 - `grid.sidebar-width: 350px` (or any non-zero value) — `hebstr-doc` defaults to `0` because single-doc has no chapter sidebar. A book needs a visible chapter navigation sidebar.
-- `include-after-body: [_extensions/hebstr-book/restore-toggle.html]` — `hebstr-doc` ships `toggle-position.html` which JS-moves the colour-scheme toggle from the sidebar into the chapter H1. Quarto cannot disable `include-after-body` from the consumer (append-merge), so the book template adds a counter-script that runs after and restores the toggle to the sidebar.
+- `include-after-body: [_extensions/hebstr/hebstr-book/restore-toggle.html]` — `hebstr-doc` ships `toggle-position.html` which JS-moves the colour-scheme toggle from the sidebar into the chapter H1. Quarto cannot disable `include-after-body` from the consumer (append-merge), so the book template adds a counter-script that runs after and restores the toggle to the sidebar.
 
 The template ships these four overrides (in `_format.yml`) with comments explaining each. Tweak the grid widths, theme paths, or `theme-extras-*.scss` content to taste; do not remove the overrides without understanding the consequences.
 
@@ -76,20 +76,20 @@ format:
   hebstr-doc-html:
     theme:
       light:
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-doc/theme-light.scss
-        - _extensions/hebstr-book/theme-extras-base.scss
-        - _extensions/hebstr-book/theme-extras-light.scss
+        - _extensions/hebstr/hebstr-doc/theme-base.scss
+        - _extensions/hebstr/hebstr-doc/theme-light.scss
+        - _extensions/hebstr/hebstr-book/theme-extras-base.scss
+        - _extensions/hebstr/hebstr-book/theme-extras-light.scss
       dark:
-        - _extensions/hebstr-doc/theme-base.scss
-        - _extensions/hebstr-doc/theme-dark.scss
-        - _extensions/hebstr-book/theme-extras-base.scss
-        - _extensions/hebstr-book/theme-extras-dark.scss
+        - _extensions/hebstr/hebstr-doc/theme-base.scss
+        - _extensions/hebstr/hebstr-doc/theme-dark.scss
+        - _extensions/hebstr/hebstr-book/theme-extras-base.scss
+        - _extensions/hebstr/hebstr-book/theme-extras-dark.scss
 ```
 
 Both halves of `theme:` must be redeclared — overriding only one drops the other variant. The `theme-extras-*` files go **last** so their `scss:defaults` win over the preceding files (opposite of the standard Bootstrap convention; cf. [hebstr-doc README → Deeper SCSS overrides](https://github.com/hebstr/quarto-hebstr-doc#deeper-scss-overrides)).
 
-Base SCSS files are referenced by **explicit path** under `_extensions/hebstr-doc/` because Quarto resolves bare file names against the consumer's project root, not the extension directory.
+Base SCSS files are referenced by **explicit path** under `_extensions/hebstr/hebstr-doc/` because Quarto resolves bare file names against the consumer's project root, not the extension directory.
 
 ## Layout knobs
 
