@@ -165,10 +165,17 @@ body {
 
 #quarto-margin-sidebar {
   text-align: left;
-  padding-left: 1.5rem;
+  padding: 1rem 0.8rem 0 0.8rem;
   background-color: var(--primary-back);
-  #toc-title {
-    display: none;
+  h2#toc-title {
+    font-size: 0.95rem;
+    color: var(--primary-dark);
+    margin: 0 0 0.3rem 0.2rem;
+  }
+  nav a#toc-title {
+    font-size: inherit;
+    color: inherit;
+    margin: 0;
   }
   .toc-active {
     > ul a {
@@ -561,6 +568,31 @@ $callout-types: (
 
 #quarto-sidebar {
   background-color: var(--primary-back);
+  .sidebar-item-section > .sidebar-item-container {
+    font-size: 1em;
+    color: var(--primary-dark);
+    a:hover {
+      color: currentColor;
+    }
+  }
+  .sidebar-item-container {
+    padding: 0.2rem;
+    text-align: left;
+    color: var(--body);
+    .chapter-number {
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+    .active {
+      color: var(--primary);
+      .chapter-number {
+        color: currentColor;
+      }
+    }
+    a:hover {
+      color: var(--primary);
+    }
+  }
 }
 
 .sidebar-title {
