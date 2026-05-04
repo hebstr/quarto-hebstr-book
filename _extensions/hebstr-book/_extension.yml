@@ -26,7 +26,6 @@ contributes:
       code-fold: true
       code-copy: always
       html-table-processing: none
-      html-math-method: plain
       callout-appearance: simple
       fig-align: center
       fig-cap-location: bottom
@@ -51,6 +50,11 @@ contributes:
         light: [theme-light.scss, theme-base.scss]
         dark: [theme-dark.scss, theme-base.scss]
       css: fonts/fonts.css
+      include-in-header:
+        - text: |
+            <script>
+            window.MathJax = { chtml: { mtextInheritFont: true } };
+            </script>
       grid:
         sidebar-width: 350px
         body-width: 1000px

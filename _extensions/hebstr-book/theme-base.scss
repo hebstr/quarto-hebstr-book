@@ -95,6 +95,15 @@ body {
   font-style: italic;
 }
 
+.blockquote {
+  color: currentColor;
+  border-color: currentColor;
+}
+
+mjx-container {
+  color: var(--primary-dark);
+}
+
 .panel-tabset {
   --tab-surface: color-mix(in srgb, var(--primary), transparent 93%);
   .nav-tabs {
